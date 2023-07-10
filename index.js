@@ -5,32 +5,63 @@ function getComputerChoice() {
 
 // console.log(getComputerChoice());
 
-let computerSelect = getComputerChoice();
-let playerSelect = prompt("Enter Choice");
 
 
 function oneRound(playerSelection, computerSelection){
-
+    let win = true;
+    let lose = false;
     if(playerSelection == computerSelection){
         return console.log("Tie")
     }
     else if((playerSelection == "rock" && computerSelection == "scissors")){
-        return console.log("You Win");
+        console.log("You Win");
+        return win;
     }
     else if((playerSelection == "rock" && computerSelection == "paper")){
-        return console.log("You Lose");
+        console.log("You Lose");
+        return lose;
     }
     else if((playerSelection == "paper" && computerSelection == "rock")){
-        return console.log("You Win");
+        console.log("You Win");
+        return true;
     }
     else if((playerSelection == "paper" && computerSelection == "scissors")){
-        return console.log("You Lose");
+        console.log("You Lose");
+        return lose;
     }
     else if((playerSelection == "scissors" && computerSelection == "rock")){
-        return console.log("You Lose");
+        console.log("You Lose");
+        return lose;
     }
     else if((playerSelection == "scissors" && computerSelection == "paper")){
-        return console.log("You Win");
+        console.log("You Win");
+        return win;
     }
 }
-console.log(oneRound(computerSelect, playerSelect))
+// console.log(oneRound(computerSelect, playerSelect));
+
+function game(){
+    let playerScore = 0;
+    let computerScore = 0;
+    for(let i = 0; i < 5; i++){
+        let input = prompt();
+        result = oneRound(input, getComputerChoice());
+        if(result == true){
+            playerScore += 1;
+        }
+        else if(result == false){
+            computerScore +=1;
+        }
+    }
+    if(playerScore > computerScore){
+        console.log("WINNER WINNER CHICKEN DINNER");
+    }
+    else if(playerScore < computerScore){
+        console.log("Me personally I wouldn't let that slide");
+    }
+    else{
+        console.log("TIE");
+    }
+    return playerScore;
+}
+game();
