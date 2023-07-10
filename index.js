@@ -45,7 +45,7 @@ function game(){
     let computerScore = 0;
     for(let i = 0; i < 5; i++){
         let input = prompt();
-        let newInput = input.toLowerCase();
+        let newInput = input.toLowerCase(); //case insensitive
         result = oneRound(newInput, getComputerChoice());
         if(result == true){
             playerScore += 1;
