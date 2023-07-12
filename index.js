@@ -77,6 +77,7 @@ function game(){
     }
     return playerScore;
 }
+
 //update score when someone wins and display winner
 function scoreTracker(){
     if(scoreC == 5 || scoreP == 5){
@@ -86,11 +87,22 @@ function scoreTracker(){
         else if(scoreC == 5){
             winner.textContent = "You lost to AI? Me personally I wouldn't let that slide";
         }
-        scoreC = 0;
-        scoreP = 0;
+        rock.disabled = true;
+        paper.disabled = true;
+        scissors.disabled = true;
+
+        playAgain.textContent = "Play Again";
+        body.appendChild(playAgain);
     }  
-    else if(scoreC == 0 || scoreP == 0){
-        winner.textContent = "";
+    
+}
+
+//resets score and match start msg (Good luck Soldier) 
+function reset(){
+    scoreC = 0;
+    scoreP = 0;
+    if(scoreC == 0 && scoreP == 0){
+        displayWL.textContent = "Good Luck Soldier";
     }
 }
 
@@ -110,6 +122,7 @@ body.appendChild(paper);
 body.appendChild(scissors);
 
 //score elements
+const display = document.createElement("div");
 const displayWL = document.createElement("p");
 const scoreDisplay = document.createElement("div");
 const playerScore = document.createElement("p");
@@ -117,21 +130,27 @@ const computerScore = document.createElement("p");
 const winner = document.createElement("h1");
 
 //add score/winner displays
-body.appendChild(displayWL);
+body.appendChild(display);
+display.appendChild(displayWL);
 body.appendChild(scoreDisplay);
 scoreDisplay.appendChild(playerScore);
 scoreDisplay.appendChild(computerScore);
 body.appendChild(winner);
 
-displayWL.textContent = "Good Luck Soldier";
+reset();
 playerScore.textContent = "Your Score: " + scoreP;
 computerScore.textContent = "Computer Score: " + scoreC;
+
+//play again button
+const playAgain = document.createElement("button");
 
 //-----------creating and adding buttons using DOM-----------//
 
 
-//---------------button functionality---------------//
-rock.addEventListener("click", function(e){
+
+
+//---------------EVENT LISTNERS---------------//
+rock.addEventListener("click", function(){
     const playRock = oneRound("rock", getComputerChoice());
     if(playRock == true){
         displayWL.textContent = "You win";
@@ -144,10 +163,10 @@ rock.addEventListener("click", function(e){
     }
     playerScore.textContent = "Your Score: " + scoreP;
     computerScore.textContent = "Computer Score: " + scoreC;
-
     scoreTracker();
     });
-paper.addEventListener("click", function(e){
+
+paper.addEventListener("click", function(){
     const playPaper = oneRound("paper", getComputerChoice());
     if(playPaper == true){
         displayWL.textContent = "You win";
@@ -162,7 +181,8 @@ paper.addEventListener("click", function(e){
     computerScore.textContent = "Computer Score: " + scoreC;
     scoreTracker();
 });
-scissors.addEventListener("click", e => {
+
+scissors.addEventListener("click", () => {
     const playScissors = oneRound("scissors", getComputerChoice());
     if(playScissors == true){
         displayWL.textContent = "You win";
@@ -177,6 +197,19 @@ scissors.addEventListener("click", e => {
     computerScore.textContent = "Computer Score: " + scoreC;
     scoreTracker();
 });
-//---------------button functionality---------------//
+
+//play again button functionality
+playAgain.addEventListener("click", function(){
+    reset();
+    rock.disabled = false;
+    paper.disabled = false;
+    scissors.disabled = false;
+    playerScore.textContent = "Your Score: " + scoreP;
+    computerScore.textContent = "Computer Score: " + scoreC;
+    playAgain.parentNode.removeChild(playAgain);
+    winner.textContent = "";
+});
+
+//---------------EVENT LISTNERS---------------//
 
 
