@@ -83,9 +83,11 @@ function scoreTracker(){
     if(scoreC == 5 || scoreP == 5){
         if(scoreP == 5){
             winner.textContent = "WINNER WINNER CHICKEN DINNER";
+            winAudio.play();
         }
         else if(scoreC == 5){
             winner.textContent = "You lost to AI? Me personally I wouldn't let that slide";
+            loseAudio.play();
         }
         rock.disabled = true;
         paper.disabled = true;
@@ -93,6 +95,7 @@ function scoreTracker(){
 
         playAgain.textContent = "Play Again";
         body.appendChild(playAgain);
+        newRound.load();
     }  
     
 }
@@ -144,12 +147,20 @@ computerScore.textContent = "Computer Score: " + scoreC;
 //play again button
 const playAgain = document.createElement("button");
 
+//adding audio objects
+const theme = new Audio("/bo2/tranzit.mp3");
+const winAudio = new Audio("/bo2/win.mp3")
+const newRound = new Audio("/bo2/newRound.mp3");
+const loseAudio = new Audio("/bo2/youLose.mp3");
+
 //-----------creating and adding buttons using DOM-----------//
 
 
-
-
 //---------------EVENT LISTNERS---------------//
+window.addEventListener("load", function(e){
+    theme.play();
+    theme.volume = .3;
+});
 rock.addEventListener("click", function(){
     const playRock = oneRound("rock", getComputerChoice());
     if(playRock == true){
@@ -208,6 +219,10 @@ playAgain.addEventListener("click", function(){
     computerScore.textContent = "Computer Score: " + scoreC;
     playAgain.parentNode.removeChild(playAgain);
     winner.textContent = "";
+    newRound.play();
+    newRound.volume = .5;
+    winAudio.load();
+    loseAudio.load();
 });
 
 //---------------EVENT LISTNERS---------------//
