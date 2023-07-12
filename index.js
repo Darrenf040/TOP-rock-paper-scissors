@@ -3,42 +3,47 @@ function getComputerChoice() {
     return arr[Math.floor(Math.random() * 3)];  //random number from 0-2
 }
 
-// console.log(getComputerChoice());
-
-
 
 function oneRound(playerSelection, computerSelection){
     let win = true;
     let lose = false;
     if(playerSelection == computerSelection){
-        return console.log("Tie")
+        console.log("Player Choice:", playerSelection);
+        console.log("Computer Choice:", computerSelection);
+        return;
     }
     else if((playerSelection == "rock" && computerSelection == "scissors")){
-        console.log("You Win");
+        console.log("Player Choice:", playerSelection);
+        console.log("Computer Choice:", computerSelection);
         return win;
     }
     else if((playerSelection == "rock" && computerSelection == "paper")){
-        console.log("You Lose");
+        console.log("Player Choice:", playerSelection);
+        console.log("Computer Choice:", computerSelection);
         return lose;
     }
     else if((playerSelection == "paper" && computerSelection == "rock")){
-        console.log("You Win");
-        return true;
+        console.log("Player Choice:", playerSelection);
+        console.log("Computer Choice:", computerSelection);
+        return win;
     }
     else if((playerSelection == "paper" && computerSelection == "scissors")){
-        console.log("You Lose");
+        console.log("Player Choice:", playerSelection);
+        console.log("Computer Choice:", computerSelection);
         return lose;
     }
     else if((playerSelection == "scissors" && computerSelection == "rock")){
-        console.log("You Lose");
+        console.log("Player Choice:", playerSelection);
+        console.log("Computer Choice:", computerSelection);
         return lose;
     }
     else if((playerSelection == "scissors" && computerSelection == "paper")){
-        console.log("You Win");
+        console.log("Player Choice:", playerSelection);
+        console.log("Computer Choice:", computerSelection);
         return win;
     }
+
 }
-// console.log(oneRound(computerSelect, playerSelect));
 
 function game(){
     let playerScore = 0;
@@ -65,4 +70,63 @@ function game(){
     }
     return playerScore;
 }
-game();
+
+//-----------creating and adding buttons using DOM-----------//
+const rock = document.createElement("button");
+rock.textContent = "Rock";
+const paper = document.createElement("button");
+paper.textContent = "Paper";
+const scissors = document.createElement("button");
+scissors.textContent = "Scissors";
+
+const body = document.querySelector("body");
+body.appendChild(rock);
+body.appendChild(paper);
+body.appendChild(scissors);
+
+const display = document.createElement("div");
+body.appendChild(display)         
+//-----------creating and adding buttons using DOM-----------//
+
+
+//---------------button functionality---------------//
+rock.addEventListener("click", function(e){
+    const playRock = oneRound("rock", getComputerChoice());
+    if(playRock == true){
+        display.textContent = "You win";
+    }
+    else if(playRock == false){
+        display.textContent = "You lose";
+    }
+    else{
+        display.textContent = "tie";
+    }
+});
+paper.addEventListener("click", function(e){
+    const playPaper = oneRound("paper", getComputerChoice());
+    if(playPaper == true){
+        display.textContent = "You win";
+    }
+    else if(playPaper == false){
+        display.textContent = "You lose";
+    }
+    else{
+        display.textContent = "tie";
+    }
+
+});
+scissors.addEventListener("click", e => {
+    const playScissors = oneRound("scissors", getComputerChoice());
+    if(playScissors == true){
+        display.textContent = "You win";
+    }
+    else if(playScissors == false){
+        display.textContent = "You lose";
+    }
+    else{
+        display.textContent = "tie";
+    }
+});
+//---------------button functionality---------------//
+
+
