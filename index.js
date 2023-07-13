@@ -155,12 +155,15 @@ const loseAudio = new Audio("./bo2/youLose.mp3");
 
 //-----------creating and adding buttons using DOM-----------//
 
+function playTheme(){
+    theme.play();
+    theme.volume = 0.3;
+}
 
 //---------------EVENT LISTNERS---------------//
-window.addEventListener("load", function(e){
-    theme.play();
-    theme.volume = .3;
-});
+
+document.addEventListener("click", playTheme);
+
 rock.addEventListener("click", function(){
     const playRock = oneRound("rock", getComputerChoice());
     if(playRock == true){
