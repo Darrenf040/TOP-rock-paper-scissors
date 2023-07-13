@@ -148,10 +148,10 @@ computerScore.textContent = "Computer Score: " + scoreC;
 const playAgain = document.createElement("button");
 
 //adding audio objects
-const theme = new Audio("/bo2/tranzit.mp3");
-const winAudio = new Audio("/bo2/win.mp3")
-const newRound = new Audio("/bo2/newRound.mp3");
-const loseAudio = new Audio("/bo2/youLose.mp3");
+const theme = new Audio("./bo2/tranzit.mp3");
+const winAudio = new Audio("./bo2/win.mp3")
+const newRound = new Audio("./bo2/newRound.mp3");
+const loseAudio = new Audio("./bo2/youLose.mp3");
 
 //-----------creating and adding buttons using DOM-----------//
 
